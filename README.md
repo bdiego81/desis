@@ -14,6 +14,7 @@ Instrucciones de Instalación:
 6. Utilizar servicio web apuntando a pagina ./index.html ubicada en la raiz del proyecto.
 
 NOTA: Se deja habilitada una live demo: https://desis.dbr.cl
+
 ---
 Estructura del Proyecto:
 
@@ -22,6 +23,7 @@ Estructura del Proyecto:
 /logic: contiene logica que procesa la informacion enviada por el usuario, realizando validaciones backend y posteriormente llamando al controlador de base de datos para su insercion.
 
 /public: contiene archivos html, javascript y estilos.
+
 ---
 Notas:
 - Proyecto desarrollado utilizando únicamente: HTML, PHP, JavaScript, AJAX y MySQL.
