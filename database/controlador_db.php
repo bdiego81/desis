@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CLASE CONTROLADORA QUE MANEJA LAS CONSULTAS A LA BASE DE DATOS.
  */
@@ -136,8 +137,17 @@ function getComunas()
     $region = $_GET['region'];
 
     // Realizar consulta para obtener las comunas de la región seleccionada
-    $consulta = "SELECT id, nombre FROM comunas WHERE id_region = " . $region;
-    $resultado = mysqli_query($conexion, $consulta);
+    $consulta = "SELECT id, nombre FROM comunas WHERE id_region = ?";
+    $stmt = mysqli_prepare($conexion, $consulta);
+
+    // Vincular parámetro a la consulta preparada
+    mysqli_stmt_bind_param($stmt, 'i', $region);
+
+    // Ejecutar la consulta preparada
+    mysqli_stmt_execute($stmt);
+
+    // Obtener los resultados
+    $resultado = mysqli_stmt_get_result($stmt);
 
     // Comprobar si se obtuvieron resultados
     if (mysqli_num_rows($resultado) > 0) {
@@ -178,10 +188,19 @@ function getCantVotos($rut)
         die("Error de conexión: " . $conn->connect_error);
     }
 
-    // Consultar la base de datos
-    $query = "SELECT * FROM votos WHERE rut = '$rut'";
-    $result = $conn->query($query);
-    
+    // Utilizar una consulta preparada
+    $query = "SELECT * FROM votos WHERE rut = ?";
+    $stmt = $conn->prepare($query);
+
+    // Vincular parámetro a la consulta preparada
+    $stmt->bind_param('s', $rut);
+
+    // Ejecutar la consulta preparada
+    $stmt->execute();
+
+    // Obtener el resultado
+    $result = $stmt->get_result();
+
     // Cerrar la conexión a la base de datos
     $conn->close();
 
@@ -211,10 +230,15 @@ function guardarVoto($nombre, $alias, $rut, $email, $comuna, $candidato, $medio)
         die('Error de conexión: ' . $conn->connect_error);
     }
 
-    // Construir la consulta SQL
-    $sql = "INSERT INTO votos (nombre, alias, rut, email, id_comuna, id_candidato, medio) VALUES ('$nombre', '$alias', '$rut', '$email', '$comuna', '$candidato', '$medio')";
+    // Utilizar una consulta preparada
+    $sql = "INSERT INTO votos (nombre, alias, rut, email, id_comuna, id_candidato, medio) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
 
-    $estado = $conn->query($sql) === TRUE;
+    // Vincular los parámetros a la consulta preparada
+    mysqli_stmt_bind_param($stmt, 'ssssiis', $nombre, $alias, $rut, $email, $comuna, $candidato, $medio);
+
+    // Ejecutar la consulta preparada
+    $estado = mysqli_stmt_execute($stmt);
 
     // Cerrar la conexión
     $conn->close();
