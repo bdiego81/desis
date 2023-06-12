@@ -18,7 +18,9 @@ NOTA: Se deja habilitada una live demo: https://desis.dbr.cl
 Estructura del Proyecto:
 
 /database: contiene archivo con datos de conexion, ademas de un controlador que maneja las peticiones a la base de datos.
+
 /logic: contiene logica que procesa la informacion enviada por el usuario, realizando validaciones backend y posteriormente llamando al controlador de base de datos para su insercion.
+
 /public: contiene archivos html, javascript y estilos.
 
 Notas:
