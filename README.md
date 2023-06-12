@@ -13,7 +13,7 @@ Instrucciones de Instalación:
 5. Actualizar datos de conexion en /database/config.php (Solo si aplica).
 6. Utilizar servicio web apuntando a pagina ./index.html ubicada en la raiz del proyecto.
 
-NOTA: Se deja habilitada una live demo: https://dbr.cl/desis
+NOTA: Se deja habilitada una live demo: https://desis.dbr.cl
 
 Estructura del Proyecto:
 
