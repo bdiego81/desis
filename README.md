@@ -17,17 +17,9 @@ NOTA: Se deja habilitada una live demo: https://desis.dbr.cl
 
 Estructura del Proyecto:
 
-/desis
-.   /database
-.       config.php
-.       controlador_db.php
-.   /logic
-.       procesar_voto.php
-.   /public
-.       /css
-.       /js
-.   index.html
-  
+/database: contiene archivo con datos de conexion, ademas de un controlador que maneja las peticiones a la base de datos.
+/logic: contiene logica que procesa la informacion enviada por el usuario, realizando validaciones backend y posteriormente llamando al controlador de base de datos para su insercion.
+/public: contiene archivos html, javascript y estilos.
 
 Notas:
 - Proyecto desarrollado utilizando únicamente: HTML, PHP, JavaScript, AJAX y MySQL.
